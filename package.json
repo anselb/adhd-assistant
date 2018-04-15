@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@google-cloud/storage": "^1.6.0",
     "dialogflow": "^0.2.1",
+    "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "socket.io": "^2.0.3"
   }

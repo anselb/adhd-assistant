@@ -46,7 +46,9 @@ function botResponse(msg) {
       console.log('Detected intent');
 
       const result = responses[0].queryResult;
-      console.log(result.fulfillmentMessages[0].text.text[0])
+      if (result.action === 'set-reminder') {
+        console.log(result.parameters.fields.time)
+      }
 
       console.log(`  Query: ${result.queryText}`);
       console.log(`  Response: ${result.fulfillmentText}`);
@@ -66,9 +68,15 @@ function botResponse(msg) {
 
 // Calculates how long to wait before sending a message
 function botTimeout(msg) {
-  const charactersPerSec = 6
   const millisecondsInSec = 1000
-  return msg.length / charactersPerSec * millisecondsInSec
+
+  // For reference, fast typers will type at around 6 characters per second
+  // const charactersPerSec = 10
+  // return msg.length / charactersPerSec * millisecondsInSec
+
+  // Different message lengths caused them to be out of order
+  // For simplicity, set an average delay of 4 seconds
+  return 4 * millisecondsInSec
 }
 
 // Sends a message after a calculated delay to seem more natural
@@ -79,6 +87,7 @@ function respondAfterDelay(message, callback) {
   }, waitTime);
 }
 
+// Start socket chat
 io.on('connection', function (socket) {
   console.log('a user connected')
   botResponse('start medication tree').then(replies => {

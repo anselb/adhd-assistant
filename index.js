@@ -75,8 +75,13 @@ function botTimeout(msg) {
   // return msg.length / charactersPerSec * millisecondsInSec
 
   // Different message lengths caused them to be out of order
-  // For simplicity, set an average delay of 4 seconds
-  return 4 * millisecondsInSec
+  // For simplicity, set an average delay of 2 seconds
+  return 2 * millisecondsInSec
+}
+
+// Set an alert for a certain time and set message to prompt at that time
+function initiateMessage(time, prompt) {
+
 }
 
 // Sends a message after a calculated delay to seem more natural
